@@ -1,0 +1,25 @@
+version: '3.1'
+
+services:
+
+  vehicle_simulator:
+    image: "zherebykh/vehicle_simulator:v1"
+    container_name: "vehicle_simulator"
+    networks: 
+      - my_network
+    
+  fleet_state:
+    image: "zherebykh/fleet_state:v1"
+    container_name: "fleet_state"
+    ports:
+      - 8080:8080
+    env_file:
+      - fleet_state.env # configure postgres  
+    networks: 
+      - my_network
+    depends_on:
+      - vehicle_simulator  
+
+networks:
+  my_network:
+    driver: bridge  
