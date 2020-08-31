@@ -92,5 +92,5 @@ Response:
  
 ## Improvement on service
  Add unit tests. Add authentication and authorisation mechanisms. Add load balancing with `sticky sessions` before service. Add `swagger`.
-
+ Add posibility to stream one vehicle to multiple endpoints.
 
