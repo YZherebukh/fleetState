@@ -49,8 +49,6 @@ func New() (Configuration, error) {
 		return nil, fmt.Errorf("set up config failed. error %s", err.Error())
 	}
 
-	err = config.setLogger("./code_test.log", "ERROR")
-
 	err = config.setLogger(os.Getenv(logFilePath), os.Getenv(logLevel))
 	if err != nil {
 		return nil, fmt.Errorf("set up config failed. error %s", err.Error())
