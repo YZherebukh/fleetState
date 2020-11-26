@@ -1,9 +1,18 @@
+//go:generate mockgen -source ../model/vehicle.go  -destination ../model/mock/mock_vehicle.go
+
 package model
 
 import (
 	"math"
 	"time"
 )
+
+// State is an interface of vehicle state store methods
+type State interface {
+	All() []string
+	One(id string) (VehicleDef, bool)
+	Update(v VehicleDef)
+}
 
 // package const
 const ()

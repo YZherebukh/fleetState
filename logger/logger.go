@@ -1,4 +1,4 @@
-//go:generate mockgen -destination mock/mock_logger.go github.com/fleetState/logger Logger
+//go:generate mockgen -source ../logger/logger.go  -destination ../logger/mock/mock_logger.go
 
 package logger
 

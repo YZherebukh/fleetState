@@ -6,12 +6,12 @@ import (
 	"github.com/google/uuid"
 )
 
-// fleetStatestring is a type definition over string to use as a key in context
-type fleetStatestring string
+// fleetStateString is a type definition over string to use as a key in context
+type fleetStateString string
 
 // package constant
 const (
-	processID fleetStatestring = "processID"
+	processID fleetStateString = "processID"
 )
 
 // SetProcessID generates new uuid and sets it as a processID into the context

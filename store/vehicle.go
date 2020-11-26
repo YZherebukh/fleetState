@@ -6,21 +6,22 @@ import (
 	"github.com/fleetState/model"
 )
 
-type state struct {
+// State is a model.VehicleDef in memory store struct
+type State struct {
 	mu      *sync.RWMutex
 	vehicle map[string]model.VehicleDef
 }
 
 // New creates new model.Vehicle instance
-func New() model.State {
-	return &state{
+func New() *State {
+	return &State{
 		mu:      &sync.RWMutex{},
 		vehicle: make(map[string]model.VehicleDef),
 	}
 }
 
 // All returns ids of all tracked vehicles
-func (s *state) All() []string {
+func (s *State) All() []string {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 
@@ -33,8 +34,8 @@ func (s *state) All() []string {
 	return resp
 }
 
-// Update updates vehicle information by ID
-func (s *state) One(id string) (model.VehicleDef, bool) {
+// One returnes one model.VehicleDef by ID
+func (s *State) One(id string) (model.VehicleDef, bool) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 
@@ -43,7 +44,7 @@ func (s *state) One(id string) (model.VehicleDef, bool) {
 }
 
 // Update updates vehicle information by ID
-func (s *state) Update(v model.VehicleDef) {
+func (s *State) Update(v model.VehicleDef) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 

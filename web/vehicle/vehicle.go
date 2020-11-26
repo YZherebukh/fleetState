@@ -1,3 +1,5 @@
+//go:generate mockgen -source ../vehicle/vehicle.go  -destination ../vehicle/mock/mock_vehicle.go
+
 package vehicle
 
 import (

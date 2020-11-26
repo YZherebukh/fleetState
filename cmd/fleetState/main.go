@@ -9,14 +9,12 @@ import (
 	"os/signal"
 	"runtime"
 
-	"github.com/fleetState/queue"
-	"github.com/fleetState/web"
-
-	"github.com/fleetState/model"
-	"github.com/fleetState/store"
-
-	"github.com/fleetState/config"
+	defaultconfig "github.com/fleetState/config/def"
 	"github.com/fleetState/logger"
+	"github.com/fleetState/model"
+	"github.com/fleetState/queue"
+	"github.com/fleetState/store"
+	"github.com/fleetState/web"
 	"github.com/fleetState/web/middleware"
 	vhcl "github.com/fleetState/web/vehicle"
 
@@ -47,7 +45,7 @@ func main() {
 }
 
 func loadService(ctx context.Context) error {
-	config, err := config.New()
+	config, err := defaultconfig.New()
 	if err != nil {
 		return fmt.Errorf("load application failed. error %s", err)
 	}
