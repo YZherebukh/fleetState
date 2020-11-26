@@ -5,28 +5,23 @@ import (
 	"net/http"
 	"time"
 
-	cont "github.com/fleetState/contextvalue"
+	cont "github.com/fleetState/context"
 	"github.com/fleetState/logger"
 )
 
-// Middleware is a middleware interface
-type Middleware interface {
-	SetContextHeader(next http.HandlerFunc) http.HandlerFunc
-	SetContextHeaderWithTimeout(next http.HandlerFunc) http.HandlerFunc
-}
-
 // New creates new Middleware
-func New(log logger.Logger) Middleware {
-	return &middleware{log: log}
+func New(log logger.Logger) *Middleware {
+	return &Middleware{log: log}
 }
 
-type middleware struct {
+// Middleware is a middleware struct
+type Middleware struct {
 	log logger.Logger
 }
 
 // SetContextHeader is a middlware, that is setting a requestID into r.Context()
 // if one is missing, and sets a timeout request to 1 minute
-func (m *middleware) SetContextHeader(next http.HandlerFunc) http.HandlerFunc {
+func (m *Middleware) SetContextHeader(next http.HandlerFunc) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 
@@ -48,7 +43,7 @@ func (m *middleware) SetContextHeader(next http.HandlerFunc) http.HandlerFunc {
 }
 
 // SetContextHeaderWithTimeout is like SetContextHeader but it also adds one minute timeout
-func (m *middleware) SetContextHeaderWithTimeout(next http.HandlerFunc) http.HandlerFunc {
+func (m *Middleware) SetContextHeaderWithTimeout(next http.HandlerFunc) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ctx, cancel := context.WithTimeout(r.Context(), time.Minute)
 		defer cancel()

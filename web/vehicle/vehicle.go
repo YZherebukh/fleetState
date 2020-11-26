@@ -11,9 +11,14 @@ import (
 	"github.com/fleetState/web"
 
 	"github.com/fleetState/logger"
-	"github.com/fleetState/web/middleware"
 	"github.com/gorilla/mux"
 )
+
+// Middleware is a middleware interface
+type Middleware interface {
+	SetContextHeader(next http.HandlerFunc) http.HandlerFunc
+	SetContextHeaderWithTimeout(next http.HandlerFunc) http.HandlerFunc
+}
 
 // package const
 const (
@@ -25,7 +30,7 @@ type Handler struct {
 	ctx        context.Context
 	router     *mux.Router
 	log        logger.Logger
-	middleware middleware.Middleware
+	middleware Middleware
 	resp       *web.Response
 	vehicle    *model.Vehicle
 	state      queue.State
@@ -33,7 +38,7 @@ type Handler struct {
 }
 
 // NewHandler creates new vehicle handler instancce
-func NewHandler(ctx context.Context, router *mux.Router, l logger.Logger, m middleware.Middleware, r *web.Response,
+func NewHandler(ctx context.Context, router *mux.Router, l logger.Logger, m Middleware, r *web.Response,
 	v *model.Vehicle, state queue.State, stream queue.Stream) {
 	h := Handler{
 		ctx:        ctx,

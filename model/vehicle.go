@@ -69,7 +69,6 @@ func (v *VehicleDef) speed(lat, long float64, t time.Time) int {
 	timePass := t.Second() - v.UpdatedAt.Second()
 
 	v.Speed.Measurement = defaultSpeedMeasurement
-	// fmt.Printf("d %f, t %f, s %f \n", distance, float64(timePass), distance/float64(timePass)*360)
 	return int(distance/float64(timePass)*360) * 1
 }
 

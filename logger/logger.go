@@ -12,7 +12,7 @@ import (
 	log "github.com/sirupsen/logrus"
 
 	"github.com/fleetState/config"
-	cont "github.com/fleetState/contextvalue"
+	cont "github.com/fleetState/context"
 )
 
 type logger struct {
