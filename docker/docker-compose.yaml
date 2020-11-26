@@ -3,13 +3,13 @@ version: '3.1'
 services:
 
   vehicle_simulator:
-    image: "zherebykh/vehicle_simulator:v1"
+    image: "zherebykh/vehicle_simulator:latest"
     container_name: "vehicle_simulator"
     networks: 
       - my_network
     
   fleet_state:
-    image: "zherebykh/fleet_state:v1"
+    image: "zherebykh/fleet_state:latest"
     container_name: "fleet_state"
     ports:
       - 8080:8080

@@ -18,7 +18,7 @@ RUN go mod download
 COPY . .
 
 # Build the application
-RUN go build ./cmd/fleetState/main.go
+RUN go build ./cmd/fleetstate/main.go
 
 # Copy binary from build to main folder
 ##RUN cp ./cmd/faceit/faceit .
